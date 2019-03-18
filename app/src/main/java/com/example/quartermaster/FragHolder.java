@@ -2,14 +2,11 @@ package com.example.quartermaster;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 /**
@@ -17,17 +14,6 @@ import android.widget.Toast;
  * status bar and navigation/system bar) with user interaction.
  */
 public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragmentInteractionListener {
-    /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
-    private static final boolean AUTO_HIDE = true;
-
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
 
     /**
      * Some older devices needs a small delay between UI widget updates
@@ -110,7 +96,7 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        delayedHide(0);
+        delayedHide();
     }
 
     private void toggle() {
@@ -135,30 +121,13 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
         mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
     }
 
-    @SuppressLint("InlinedApi")
-    private void show() {
-        // Show the system bar
-        mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-        mVisible = true;
-
-        // Schedule a runnable to display UI elements after a delay
-        mHideHandler.removeCallbacks(mHidePart2Runnable);
-        mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
-    }
-
     /**
      * Schedules a call to hide() in delay milliseconds, canceling any
      * previously scheduled calls.
      */
-    private void delayedHide(int delayMillis) {
+    private void delayedHide() {
         mHideHandler.removeCallbacks(mHideRunnable);
-        mHideHandler.postDelayed(mHideRunnable, delayMillis);
-    }
-
-    @Override
-    public void onFragmentInteraction(Button button) {
-
+        mHideHandler.postDelayed(mHideRunnable, 0);
     }
 
     @Override
@@ -169,7 +138,6 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
             startActivity(launchGoogleHome);
         } catch (java.lang.NullPointerException e) {
             Toast.makeText(v.getContext(), "Google Home is not installed.", Toast.LENGTH_SHORT).show();
-
         }
 
     }

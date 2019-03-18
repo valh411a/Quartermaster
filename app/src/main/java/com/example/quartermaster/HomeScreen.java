@@ -1,14 +1,13 @@
 package com.example.quartermaster;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -33,7 +32,7 @@ public class HomeScreen extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
@@ -43,13 +42,6 @@ public class HomeScreen extends Fragment {
         Button button = view.findViewById(R.id.homeAppStart);
         button.setOnClickListener(mListener);
         return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Button button) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(button);
-        }
     }
 
     @Override
@@ -80,8 +72,6 @@ public class HomeScreen extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener extends View.OnClickListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Button button);
 
         @Override
         void onClick(View v);
