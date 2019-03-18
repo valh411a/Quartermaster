@@ -163,7 +163,7 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
 
     @Override
     public void onClick(View v) {
-        Intent launchGoogleHome = getPackageManager().getLaunchIntentForPackage("com.google.android.music");
+//        Intent launchGoogleHome = getPackageManager().getLaunchIntentForPackage("com.google.android.music");
         Intent launchGoogleHome = getPackageManager().getLaunchIntentForPackage("com.google.android.apps.chromecast.app");
         try {
             startActivity(launchGoogleHome);
