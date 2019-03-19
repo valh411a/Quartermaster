@@ -4,10 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -27,6 +27,8 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
+    private Fragment fragment = null;
+    private final FragmentManager fragmentManager = getSupportFragmentManager();
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -72,26 +74,23 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_frag_holder);
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fragment);
 
-        final FragmentManager fragmentManager = getSupportFragmentManager();
 
-        Log.i("pre-timer", "message displaying pre-timer status.");
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask(){
+        TimerTask task = new TimerTask() {
             @Override
-            public void run(){
-                Log.i("Timer", "Replacing Fragment...");
-                HomeScreen fragment = new HomeScreen();
+            public void run() {
+                fragment = new HomeScreen();
                 fragmentManager.beginTransaction().replace(R.id.fragment, fragment).commit();
-
             }
-        }, 0, 60000);
+        };
+        timer.schedule(task, 0, 10000);
+
 
 
         // Set up the user interaction to manually show or hide the system UI.

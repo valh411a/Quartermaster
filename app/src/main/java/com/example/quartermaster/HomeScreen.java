@@ -27,6 +27,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 
@@ -38,35 +39,62 @@ import java.util.concurrent.ExecutionException;
  */
 public class HomeScreen extends Fragment {
 
+    private OnFragmentInteractionListener mListener;
+    private Date date;
 
-
-    private HomeScreen.OnFragmentInteractionListener mListener;
-
-    public HomeScreen() {
-        // Required empty public constructor
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
     }
 
+    @Override
+    public  void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Calendar calendar = Calendar.getInstance();
+        date = calendar.getTime();
+    }
 
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Calendar calendar = Calendar.getInstance();
-        Date date = calendar.getTime();
+
+        Random random = new Random();
+
         View view = inflater.inflate(R.layout.fragment_home_screen, container, false);
         TextView day = view.findViewById(R.id.Day);
         day.setText(new SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.ENGLISH).format(date.getTime()));
+
         Button button = view.findViewById(R.id.homeAppStart);
         button.setOnClickListener(mListener);
-        TextView temperature = view.findViewById(R.id.weatherTemp);
-        TextView type = view.findViewById(R.id.weatherType);
-        temperature.setText("00");
-        type.setText("Undefined");
+
+//        TextView temperature = view.findViewById(R.id.weatherTemp);
+//        temperature.setText(String.valueOf(random.nextInt(100)));
+//
+//        TextView type = view.findViewById(R.id.weatherType);
+//        type.setText("Undefined");
         setWeatherText(view);
 
         Log.i("fragResponse", "Fragment View Created.");
         return view;
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public HomeScreen() {
+        // Required empty public constructor
+    }
+
 
     @SuppressLint("SetTextI18n")
     public void setWeatherText(View view){
@@ -218,23 +246,6 @@ public class HomeScreen extends Fragment {
             case 804:
                 type.setText("Cloudy");
         }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     /**

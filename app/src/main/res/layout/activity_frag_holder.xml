@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
     tools:context=".FragHolder">
 
-    <fragment
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/fragment"
-        android:name="com.example.quartermaster.HomeScreen"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@layout/fragment_home_screen" />
+        android:layout_height="match_parent">
+
+    </android.support.constraint.ConstraintLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -29,7 +28,6 @@
             tools:ignore="UselessParent">
 
             <Button
-                android:id="@+id/dummy_button"
                 style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
