@@ -130,7 +130,8 @@ public class HomeScreen extends Fragment {
         tempIndex = weatherDataSub.indexOf("id");
         //System.out.println(tempIndex);
         Integer typeID = Integer.valueOf(weatherDataSub.substring(tempIndex+4, tempIndex+7));
-        //System.out.println(typeID);
+        System.out.println(typeID);
+        //TODO: Weather type not representing correctly
 
 
         switch (typeID) {
@@ -245,6 +246,8 @@ public class HomeScreen extends Fragment {
                 type.setText("Mostly Cloudy");
             case 804:
                 type.setText("Cloudy");
+            default:
+                type.setText("Unassigned");
         }
     }
 
