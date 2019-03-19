@@ -2,12 +2,17 @@ package com.example.quartermaster;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -73,6 +78,20 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fragment);
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        Log.i("pre-timer", "message displaying pre-timer status.");
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask(){
+            @Override
+            public void run(){
+                Log.i("Timer", "Replacing Fragment...");
+                HomeScreen fragment = new HomeScreen();
+                fragmentManager.beginTransaction().replace(R.id.fragment, fragment).commit();
+
+            }
+        }, 0, 60000);
 
 
         // Set up the user interaction to manually show or hide the system UI.
