@@ -89,7 +89,7 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
                 fragmentManager.beginTransaction().replace(R.id.fragment, fragment).commit();
             }
         };
-        timer.schedule(task, 0, 10000);
+        timer.schedule(task, 0, 1000);
 
 
 

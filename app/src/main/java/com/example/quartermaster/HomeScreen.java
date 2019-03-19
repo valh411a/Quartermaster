@@ -27,7 +27,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 
@@ -65,7 +64,7 @@ public class HomeScreen extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Random random = new Random();
+        //Random random = new Random();
 
         View view = inflater.inflate(R.layout.fragment_home_screen, container, false);
         TextView day = view.findViewById(R.id.Day);
@@ -94,7 +93,6 @@ public class HomeScreen extends Fragment {
     public HomeScreen() {
         // Required empty public constructor
     }
-
 
     @SuppressLint("SetTextI18n")
     public void setWeatherText(View view){
@@ -137,117 +135,173 @@ public class HomeScreen extends Fragment {
         switch (typeID) {
             case 200:
                 type.setText("Thunderstorm, Light Rain");
+                break;
             case 201:
                 type.setText("Thunderstorm, Moderate Rain");
+                break;
             case 202:
                 type.setText("Thunderstorm, Heavy Rain");
+                break;
             case 210:
                 type.setText("Thunderstorm");
+                break;
             case 211:
                 type.setText("Thunderstorm");
+                break;
             case 212:
                 type.setText("Heavy Thunderstorm");
+                break;
             case 221:
                 type.setText("Isolated Thunderstorms");
+                break;
             case 230:
                 type.setText("Thunderstorm, Light Drizzle");
+                break;
             case 231:
                 type.setText("Thunderstorm, Moderate Drizzle");
+                break;
             case 232:
                 type.setText("Thunderstorm, Rain/Drizzle");
+                break;
             case 300:
                 type.setText("Light Drizzle");
+                break;
             case 301:
                 type.setText("Drizzle");
+                break;
             case 302:
                 type.setText("Heavy Drizzle");
+                break;
             case 310:
                 type.setText("Light Drizzle/Rain");
+                break;
             case 311:
                 type.setText("Drizzle/Rain");
+                break;
             case 312:
                 type.setText("Heavy Drizzle/Rain");
+                break;
             case 313:
                 type.setText("Shower/Drizzle");
+                break;
             case 314:
                 type.setText("Heavy Shower/Drizzle");
+                break;
             case 321:
                 type.setText("Shower/Drizzle");
+                break;
             case 500:
                 type.setText("Light Rain");
+                break;
             case 501:
                 type.setText("Rain");
+                break;
             case 502:
                 type.setText("Heavy Rain");
+                break;
             case 503:
                 type.setText("Very Heavy Rain");
+                break;
             case 504:
                 type.setText("Torrential Downpour");
+                break;
             case 511:
                 type.setText("Freezing Rain");
+                break;
             case 520:
                 type.setText("Light Showers");
+                break;
             case 521:
                 type.setText("Showers");
+                break;
             case 522:
                 type.setText("Heavy Showers");
+                break;
             case 531:
                 type.setText("Isolated Showers");
+                break;
             case 600:
                 type.setText("Flurries");
+                break;
             case 601:
                 type.setText("Snow");
+                break;
             case 602:
                 type.setText("Heavy Snow");
+                break;
             case 611:
                 type.setText("Sleet");
+                break;
             case 612:
                 type.setText("Light Sleet/Rain");
+                break;
             case 613:
                 type.setText("Sleet/Rain");
+                break;
             case 615:
                 type.setText("Light Snow/Rain");
+                break;
             case 616:
                 type.setText("Snow/Rain");
+                break;
             case 620:
                 type.setText("Light Snow/Showers");
+                break;
             case 621:
                 type.setText("Snow/Showers");
+                break;
             case 622:
                 type.setText("Heavy Snow/Showers");
+                break;
             case 701:
                 type.setText("Misty");
+                break;
             case 711:
                 type.setText("Smoky [Warning]");
+                break;
             case 721:
                 type.setText("Hazy");
+                break;
             case 731:
                 type.setText("Sand/Dust [Warning]");
+                break;
             case 741:
                 type.setText("Foggy");
+                break;
             case 751:
                 type.setText("Sandy Air [Warning]");
+                break;
             case 761:
                 type.setText("Dusty [Warning]");
+                break;
             case 762:
                 //REEEEAAAAllY hoping this one never needs to be used...
                 type.setText("Volcanic Ash [Warning]");
+                break;
             case 771:
                 type.setText("Temporary Heavy Rain");
+                break;
             case 781:
                 type.setText("Tornado [Warning]");
+                break;
             case 800:
                 type.setText("Clear");
+                break;
             case 801:
                 type.setText("Scattered Clouds");
+                break;
             case 802:
                 type.setText("Partially Cloudy");
+                break;
             case 803:
                 type.setText("Mostly Cloudy");
+                break;
             case 804:
                 type.setText("Cloudy");
+                break;
             default:
                 type.setText("Unassigned");
+                break;
         }
     }
 
