@@ -10,9 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -40,6 +39,7 @@ public class HomeScreen extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private Date date;
+    String cityID;
 
     @Override
     public void onAttach(Context context) {
@@ -57,6 +57,13 @@ public class HomeScreen extends Fragment {
         super.onCreate(savedInstanceState);
         Calendar calendar = Calendar.getInstance();
         date = calendar.getTime();
+        cityID = "4473083";
+
+        if (this.getArguments() != null) {
+            cityID = this.getArguments().getString("cityID");
+        } else {
+            Log.e("noID", "No Valid City ID found when creating the view. Defaulting to city ID 4473083.");
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -70,7 +77,7 @@ public class HomeScreen extends Fragment {
         TextView day = view.findViewById(R.id.Day);
         day.setText(new SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.ENGLISH).format(date.getTime()));
 
-        Button button = view.findViewById(R.id.homeAppStart);
+        ImageButton button = view.findViewById(R.id.homeAppStart);
         button.setOnClickListener(mListener);
 
 //        TextView temperature = view.findViewById(R.id.weatherTemp);
@@ -78,7 +85,10 @@ public class HomeScreen extends Fragment {
 //
 //        TextView type = view.findViewById(R.id.weatherType);
 //        type.setText("Undefined");
-        setWeatherText(view);
+
+
+        System.out.println("cityID = " + cityID);
+        setWeatherText(view, cityID);
 
         Log.i("fragResponse", "Fragment View Created.");
         return view;
@@ -95,13 +105,13 @@ public class HomeScreen extends Fragment {
     }
 
     @SuppressLint("SetTextI18n")
-    public void setWeatherText(View view){
+    public void setWeatherText(View view, String cityID){
         TextView temperature = view.findViewById(R.id.weatherTemp);
         TextView type = view.findViewById(R.id.weatherType);
         GetData data = new GetData();
         String weatherData = null;
         try {
-            weatherData = data.execute("4473083").get();
+            weatherData = data.execute(cityID).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -123,14 +133,11 @@ public class HomeScreen extends Fragment {
 
         temperature.setText(String.valueOf(temp.intValue()) + "\u00B0");
 
-        tempIndex = weatherData.indexOf("weather");
-        String weatherDataSub = weatherData.substring(tempIndex);
+        tempIndex = weatherData.indexOf("weather");String weatherDataSub = weatherData.substring(tempIndex);
         tempIndex = weatherDataSub.indexOf("id");
         //System.out.println(tempIndex);
         Integer typeID = Integer.valueOf(weatherDataSub.substring(tempIndex+4, tempIndex+7));
-        System.out.println(typeID);
-        //TODO: Weather type not representing correctly
-
+        System.out.println("Weather type ID: " + typeID);
 
         switch (typeID) {
             case 200:
@@ -321,7 +328,6 @@ public class HomeScreen extends Fragment {
         void onClick(View v);
     }
 
-    @SuppressLint("StaticFieldLeak")
     class GetData extends AsyncTask<String,Void,String> {
 
         @Override
@@ -352,7 +358,7 @@ public class HomeScreen extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Fetching Weather Changes...", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Fetching Weather Changes...", Toast.LENGTH_SHORT).show();
         }
 
     }
