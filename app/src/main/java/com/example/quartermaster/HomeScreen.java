@@ -18,10 +18,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -39,7 +42,7 @@ public class HomeScreen extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private Date date;
-    String cityID;
+    String cityNum = "4473083";
 
     @Override
     public void onAttach(Context context) {
@@ -57,13 +60,7 @@ public class HomeScreen extends Fragment {
         super.onCreate(savedInstanceState);
         Calendar calendar = Calendar.getInstance();
         date = calendar.getTime();
-        cityID = "4473083";
 
-        if (this.getArguments() != null) {
-            cityID = this.getArguments().getString("cityID");
-        } else {
-            Log.e("noID", "No Valid City ID found when creating the view. Defaulting to city ID 4473083.");
-        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -86,9 +83,19 @@ public class HomeScreen extends Fragment {
 //        TextView type = view.findViewById(R.id.weatherType);
 //        type.setText("Undefined");
 
+        FragHolder  parentActivity = (FragHolder) getActivity();
+        if (parentActivity != null && parentActivity.getCityString() != null) {
+            System.out.println("parentActivity != null");
+            cityNum = parentActivity.getCityString();
+        } else if (this.getArguments() != null && this.getArguments().getString("cityID") != null) {
+            cityNum = this.getArguments().getString("cityID");
+        } else {
+            Log.e("noID", "No Valid City ID found when creating the view. Defaulting to city ID 4473083.");
+            cityNum = "4473083";
+        }
 
-        System.out.println("cityID = " + cityID);
-        setWeatherText(view, cityID);
+        System.out.println("cityID = " + cityNum);
+        setWeatherText(view, cityNum);
 
         Log.i("fragResponse", "Fragment View Created.");
         return view;
@@ -328,15 +335,29 @@ public class HomeScreen extends Fragment {
         void onClick(View v);
     }
 
+    @SuppressLint("StaticFieldLeak")
     class GetData extends AsyncTask<String,Void,String> {
 
         @Override
         protected String doInBackground(String... params) {
             StringBuilder result = new StringBuilder();
             HttpURLConnection conn = null;
+            params = new String[1];
+            params[0] = cityNum;
+            System.out.println("Params pre Null = " + Arrays.toString(params));
             try {
-                URL url = new URL("http://api.openweathermap.org/data/2.5/weather?id="+ URLEncoder.encode(params[0], "UTF-8")+"&APPID=5167c48bdd03fe44dcc005400d4b35e4");
-                conn = (HttpURLConnection) url.openConnection();
+                URL url = null;
+                try {
+                    url = new URL("http://api.openweathermap.org/data/2.5/weather?id="+ URLEncoder.encode(params[0], "UTF-8")+"&APPID=5167c48bdd03fe44dcc005400d4b35e4");
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (NullPointerException e) {
+                    System.out.println("Params post Null" + Arrays.toString(params));
+                    e.printStackTrace();
+                }
+                conn = (HttpURLConnection) Objects.requireNonNull(url).openConnection();
                 InputStream in = new BufferedInputStream(conn.getInputStream());
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
                 String line;

@@ -1,5 +1,6 @@
 package com.example.quartermaster;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -12,10 +13,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 public class SettingsDialogFragment extends DialogFragment {
 
     public interface SettingsDialogListener {
-        public void onDialogPositiveClick(DialogFragment dialog);
+        void onDialogPositiveClick(DialogFragment dialog);
     }
 
     SettingsDialogListener listener;
@@ -42,7 +45,7 @@ public class SettingsDialogFragment extends DialogFragment {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
-        final View view = inflater.inflate(R.layout.fragment_settings_dialog, null);
+        @SuppressLint("InflateParams") final View view = inflater.inflate(R.layout.fragment_settings_dialog, null);
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
@@ -51,7 +54,7 @@ public class SettingsDialogFragment extends DialogFragment {
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                EditText cityCodeBox = (EditText)view.findViewById(R.id.editText);
+                EditText cityCodeBox = view.findViewById(R.id.editText);
                 cityID = cityCodeBox.getText().toString();
                 Bundle bundle = new Bundle();
                 bundle.putString("cityID", cityID);
@@ -62,7 +65,7 @@ public class SettingsDialogFragment extends DialogFragment {
         builder.setNegativeButton("Discard", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getActivity().getApplicationContext(), "Changes Discarded", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Changes Discarded", Toast.LENGTH_SHORT).show();
             }
         });
         return builder.create();

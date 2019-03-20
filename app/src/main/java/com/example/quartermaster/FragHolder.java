@@ -30,9 +30,11 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
             @Override
             public void run() {
                 fragment = new HomeScreen();
+                System.out.println("FragHolder cityString = " + cityString);
                 Bundle bundle = new Bundle();
                 bundle.putString("cityID",cityString);
                 fragment.setArguments(bundle);
+
                 fragmentManager.beginTransaction().replace(R.id.fragment, fragment).commit();
             }
         };
@@ -56,8 +58,8 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
 
     }
 
-    public void onDialogConfirm (View view) {
-
+    public String getCityString () {
+        return cityString;
     }
 
     @Override
