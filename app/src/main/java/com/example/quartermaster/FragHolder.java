@@ -65,8 +65,15 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        Toast.makeText(getApplicationContext(), "Weather will update on next refresh.", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), "Weather will update on next refresh.", Toast.LENGTH_SHORT).show();
         cityString = Objects.requireNonNull(dialog.getArguments()).getString("cityID");
+        fragment = new HomeScreen();
+//                System.out.println("FragHolder cityString = " + cityString);
+        Bundle bundle = new Bundle();
+        bundle.putString("cityID", cityString);
+        fragment.setArguments(bundle);
+
+        fragmentManager.beginTransaction().replace(R.id.fragment, fragment).commitAllowingStateLoss();
     }
 
     @Override

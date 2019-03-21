@@ -90,23 +90,12 @@ public class HomeScreen extends Fragment {
         ImageButton button = view.findViewById(R.id.homeAppStart);
         button.setOnClickListener(mListener);
 
-//        TextView temperature = view.findViewById(R.id.weatherTemp);
-//        temperature.setText(String.valueOf(random.nextInt(100)));
-//
-//        TextView type = view.findViewById(R.id.weatherType);
-//        type.setText("Undefined");
-
-//        FragHolder  parentActivity = (FragHolder) getActivity();
-//        if (parentActivity != null && parentActivity.getCityString() != null) {
-//            System.out.println("parentActivity != null");
-//            cityNum = parentActivity.getCityString();
-//        } else
         String cityNum;
         if (this.getArguments() != null && this.getArguments().getString("cityID") != null) {
             cityNum = this.getArguments().getString("cityID");
         } else {
-            Log.e("noID", "No Valid City ID found when creating the view. Defaulting to city ID 4473083.");
-            cityNum = "4473083";
+            Log.e("noID", "No Valid City ID found when creating the view. Defaulting to city ID 5128581.");
+            cityNum = "5128581";
         }
 
 //        System.out.println("cityID = " + cityNum);
@@ -130,6 +119,7 @@ public class HomeScreen extends Fragment {
     private void setWeatherText(View view, String cityID) {
         TextView temperature = view.findViewById(R.id.weatherTemp);
         TextView type = view.findViewById(R.id.weatherType);
+        TextView cityName = view.findViewById(R.id.cityName);
         GetData data = new GetData();
         String weatherData = null;
         try {
@@ -139,7 +129,7 @@ public class HomeScreen extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //System.out.println(weatherData);
+//        System.out.println(weatherData);
 
         int tempIndex = Objects.requireNonNull(weatherData).indexOf("temp");
         //System.out.println(tempIndex);
@@ -157,6 +147,20 @@ public class HomeScreen extends Fragment {
         //System.out.println(temp.intValue());
 
         temperature.setText(String.valueOf(temp.intValue()) + "\u00B0");
+
+        int cityNameIndex;
+
+        try {
+            cityNameIndex = weatherData.indexOf("name");
+            String cityNameSubstring = weatherData.substring(cityNameIndex + 6);
+//        System.out.println(cityNameSubstring);
+            String[] cityNameSubstringArray = cityNameSubstring.split("\"");
+//        System.out.println(cityNameSubstringArray[1]);
+            cityName.setText(cityNameSubstringArray[1]);
+        } catch (StringIndexOutOfBoundsException e) {
+            cityName.setText("Chargoggagoggmanchauggagoggchaubunagungamaugg");
+        }
+
 
         int typeID;
         try {
