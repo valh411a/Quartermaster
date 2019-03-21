@@ -157,7 +157,7 @@ public class HomeScreen extends Fragment {
             typeID = Integer.parseInt(weatherDataSub.substring(tempIndex + 4, tempIndex + 7));
         } catch (StringIndexOutOfBoundsException e) {
             Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Debug Mode Active, enter a valid city ID to reset.", Toast.LENGTH_SHORT).show();
-            typeID = 231;
+            typeID = 762;
         }
         System.out.println("Weather type ID: " + typeID);
 

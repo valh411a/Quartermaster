@@ -9,5 +9,5 @@
     <string name="button_shows_setting_dialog">button shows setting dialog</string>
     <string name="city_code">City Code</string>
     <string name="_1234567">1234567</string>
-    <string name="data_obtained_from_https_openweathermap_org">Data obtained from https://openweathermap.org/</string>
+    <string name="data_obtained_from_https_openweathermap_org">Data obtained from https://openweathermap.org/city/{CITY CODE}</string>
 </resources>
