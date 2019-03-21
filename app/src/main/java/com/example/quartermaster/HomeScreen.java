@@ -1,6 +1,7 @@
 package com.example.quartermaster;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -42,7 +44,6 @@ public class HomeScreen extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private Date date;
-    String cityNum = "4473083";
 
     @Override
     public void onAttach(Context context) {
@@ -60,9 +61,11 @@ public class HomeScreen extends Fragment {
         super.onCreate(savedInstanceState);
         Calendar calendar = Calendar.getInstance();
         date = calendar.getTime();
+        setFullscreen(Objects.requireNonNull(getActivity()));
 
     }
 
+    @SuppressWarnings("ConstantConditions")
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -83,18 +86,20 @@ public class HomeScreen extends Fragment {
 //        TextView type = view.findViewById(R.id.weatherType);
 //        type.setText("Undefined");
 
-        FragHolder  parentActivity = (FragHolder) getActivity();
-        if (parentActivity != null && parentActivity.getCityString() != null) {
-            System.out.println("parentActivity != null");
-            cityNum = parentActivity.getCityString();
-        } else if (this.getArguments() != null && this.getArguments().getString("cityID") != null) {
+//        FragHolder  parentActivity = (FragHolder) getActivity();
+//        if (parentActivity != null && parentActivity.getCityString() != null) {
+//            System.out.println("parentActivity != null");
+//            cityNum = parentActivity.getCityString();
+//        } else
+        String cityNum;
+        if (this.getArguments() != null && this.getArguments().getString("cityID") != null) {
             cityNum = this.getArguments().getString("cityID");
         } else {
             Log.e("noID", "No Valid City ID found when creating the view. Defaulting to city ID 4473083.");
             cityNum = "4473083";
         }
 
-        System.out.println("cityID = " + cityNum);
+//        System.out.println("cityID = " + cityNum);
         setWeatherText(view, cityNum);
 
         Log.i("fragResponse", "Fragment View Created.");
@@ -112,7 +117,7 @@ public class HomeScreen extends Fragment {
     }
 
     @SuppressLint("SetTextI18n")
-    public void setWeatherText(View view, String cityID){
+    private void setWeatherText(View view, String cityID) {
         TextView temperature = view.findViewById(R.id.weatherTemp);
         TextView type = view.findViewById(R.id.weatherType);
         GetData data = new GetData();
@@ -134,16 +139,26 @@ public class HomeScreen extends Fragment {
         } catch (NumberFormatException e) {
             Log.e("DoubleSubstringTooLong", "Substring Too Long, parsing truncated substring..." + weatherData.substring(tempIndex+6, tempIndex+12) + "->" + weatherData.substring(tempIndex+6, tempIndex+9));
             temp = Double.valueOf(weatherData.substring(tempIndex+6, tempIndex+9));
+        } catch (StringIndexOutOfBoundsException e) {
+            Log.e("String Out of Bounds", weatherData);
+            temp = 810.372;
         }
         temp = (temp - 273.15)*9/5 + 32;
         //System.out.println(temp.intValue());
 
         temperature.setText(String.valueOf(temp.intValue()) + "\u00B0");
 
-        tempIndex = weatherData.indexOf("weather");String weatherDataSub = weatherData.substring(tempIndex);
-        tempIndex = weatherDataSub.indexOf("id");
-        //System.out.println(tempIndex);
-        Integer typeID = Integer.valueOf(weatherDataSub.substring(tempIndex+4, tempIndex+7));
+        int typeID;
+        try {
+            tempIndex = weatherData.indexOf("weather");
+            String weatherDataSub = weatherData.substring(tempIndex);
+            tempIndex = weatherDataSub.indexOf("id");
+            //System.out.println(tempIndex);
+            typeID = Integer.parseInt(weatherDataSub.substring(tempIndex + 4, tempIndex + 7));
+        } catch (StringIndexOutOfBoundsException e) {
+            Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Debug Mode Active, enter a valid city ID to reset.", Toast.LENGTH_SHORT).show();
+            typeID = 231;
+        }
         System.out.println("Weather type ID: " + typeID);
 
         switch (typeID) {
@@ -319,6 +334,13 @@ public class HomeScreen extends Fragment {
         }
     }
 
+    private void setFullscreen(Activity activity) {
+        int flags = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+
+        activity.getWindow().getDecorView().setSystemUiVisibility(flags);
+    }
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -342,9 +364,9 @@ public class HomeScreen extends Fragment {
         protected String doInBackground(String... params) {
             StringBuilder result = new StringBuilder();
             HttpURLConnection conn = null;
-            params = new String[1];
-            params[0] = cityNum;
-            System.out.println("Params pre Null = " + Arrays.toString(params));
+//            params = new String[1];
+//            params[0] = cityNum;
+//            System.out.println("Params pre Null = " + Arrays.toString(params));
             try {
                 URL url = null;
                 try {

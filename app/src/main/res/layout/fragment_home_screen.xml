@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="?android:attr/textColorPrimary"
-            android:textSize="256px"
+            android:textSize="72sp"
             app:layout_constraintBottom_toTopOf="@+id/Day"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -106,15 +106,16 @@
 
             <TextView
                 android:id="@+id/weatherType"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="?android:attr/textColorPrimary"
-                android:textSize="64px"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -139,7 +140,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/settings"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+            android:contentDescription="@string/button_launches_google_home_app"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            tools:ignore="OnClick" />
 
         <ImageButton
             android:id="@+id/settings"
@@ -155,7 +158,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/homeAppStart"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+            android:contentDescription="@string/button_shows_setting_dialog"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            tools:ignore="OnClick" />
 
     </android.support.constraint.ConstraintLayout>
 

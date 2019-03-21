@@ -21,8 +21,8 @@ public class SettingsDialogFragment extends DialogFragment {
         void onDialogPositiveClick(DialogFragment dialog);
     }
 
-    SettingsDialogListener listener;
-    String cityID;
+    private SettingsDialogListener listener;
+    private String cityID;
 
     @Override
     public void onAttach(Context context) {

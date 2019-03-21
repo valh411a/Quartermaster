@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".FragHolder">
+    tools:context=".FragHolder"
+    tools:ignore="Overdraw">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/fragment"

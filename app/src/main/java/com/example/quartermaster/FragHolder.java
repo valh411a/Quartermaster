@@ -17,7 +17,7 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
 
     private Fragment fragment = null;
     private final FragmentManager fragmentManager = getSupportFragmentManager();
-    String cityString;
+    private String cityString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
             @Override
             public void run() {
                 fragment = new HomeScreen();
-                System.out.println("FragHolder cityString = " + cityString);
+//                System.out.println("FragHolder cityString = " + cityString);
                 Bundle bundle = new Bundle();
                 bundle.putString("cityID",cityString);
                 fragment.setArguments(bundle);
@@ -58,12 +58,15 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
 
     }
 
-    public String getCityString () {
-        return cityString;
-    }
+//    public String getCityString () {
+//        return cityString;
+//    }
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
+        Toast.makeText(getApplicationContext(), "Weather will update on next refresh.", Toast.LENGTH_SHORT).show();
         cityString = Objects.requireNonNull(dialog.getArguments()).getString("cityID");
     }
+
+
 }
