@@ -3,6 +3,7 @@ package com.example.quartermaster;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -71,9 +72,18 @@ public class HomeScreen extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View view;
         //Random random = new Random();
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            view = inflater.inflate(R.layout.fragment_home_screen, container, false);
+        } else if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            view = inflater.inflate(R.layout.fragment_home_screen_portrait, container, false);
+        } else {
+            view = inflater.inflate(R.layout.fragment_home_screen, container, false);
+        }
 
-        View view = inflater.inflate(R.layout.fragment_home_screen, container, false);
+
         TextView day = view.findViewById(R.id.Day);
         day.setText(new SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.ENGLISH).format(date.getTime()));
 

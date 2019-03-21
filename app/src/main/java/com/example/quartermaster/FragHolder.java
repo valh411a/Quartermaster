@@ -1,6 +1,7 @@
 package com.example.quartermaster;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -35,7 +36,7 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
                 bundle.putString("cityID",cityString);
                 fragment.setArguments(bundle);
 
-                fragmentManager.beginTransaction().replace(R.id.fragment, fragment).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragment, fragment).commitAllowingStateLoss();
             }
         };
         timer.schedule(task, 0, 10000);
@@ -68,5 +69,17 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
         cityString = Objects.requireNonNull(dialog.getArguments()).getString("cityID");
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+//        Toast.makeText(this, "Orientation changed, UI will update on next weather refresh.", Toast.LENGTH_SHORT).show();
+        fragment = new HomeScreen();
+//                System.out.println("FragHolder cityString = " + cityString);
+        Bundle bundle = new Bundle();
+        bundle.putString("cityID", cityString);
+        fragment.setArguments(bundle);
+
+        fragmentManager.beginTransaction().replace(R.id.fragment, fragment).commitAllowingStateLoss();
+    }
 
 }
