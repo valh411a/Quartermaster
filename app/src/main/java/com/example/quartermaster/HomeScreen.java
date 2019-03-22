@@ -26,6 +26,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -45,6 +46,7 @@ public class HomeScreen extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private Date date;
+    private Date time;
 
     @Override
     public void onAttach(Context context) {
@@ -62,6 +64,7 @@ public class HomeScreen extends Fragment {
         super.onCreate(savedInstanceState);
         Calendar calendar = Calendar.getInstance();
         date = calendar.getTime();
+        time = calendar.getTime();
         setFullscreen(Objects.requireNonNull(getActivity()));
 
     }
@@ -85,7 +88,9 @@ public class HomeScreen extends Fragment {
 
 
         TextView day = view.findViewById(R.id.Day);
+        TextView timeView = view.findViewById(R.id.Clock);
         day.setText(new SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.ENGLISH).format(date.getTime()));
+        timeView.setText(new SimpleDateFormat("h:mm a", Locale.ENGLISH).format(time.getTime()));
 
         ImageButton button = view.findViewById(R.id.homeAppStart);
         button.setOnClickListener(mListener);
