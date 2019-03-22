@@ -19,6 +19,7 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
     private Fragment fragment = null;
     private final FragmentManager fragmentManager = getSupportFragmentManager();
     private String cityString;
+    private boolean activityPaused;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
 //                System.out.println("FragHolder cityString = " + cityString);
                 Bundle bundle = new Bundle();
                 bundle.putString("cityID",cityString);
+                bundle.putBoolean("activityState", activityPaused);
                 fragment.setArguments(bundle);
 
                 fragmentManager.beginTransaction().replace(R.id.fragment, fragment).commitAllowingStateLoss();
@@ -74,6 +76,18 @@ public class FragHolder extends AppCompatActivity implements HomeScreen.OnFragme
         fragment.setArguments(bundle);
 
         fragmentManager.beginTransaction().replace(R.id.fragment, fragment).commitAllowingStateLoss();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        activityPaused = true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        activityPaused = false;
     }
 
     @Override

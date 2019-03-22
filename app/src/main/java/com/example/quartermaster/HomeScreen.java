@@ -26,7 +26,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -47,6 +46,7 @@ public class HomeScreen extends Fragment {
     private OnFragmentInteractionListener mListener;
     private Date date;
     private Date time;
+    private boolean activityPaused;
 
     @Override
     public void onAttach(Context context) {
@@ -86,6 +86,7 @@ public class HomeScreen extends Fragment {
             view = inflater.inflate(R.layout.fragment_home_screen, container, false);
         }
 
+        activityPaused = this.getArguments().getBoolean("activityState");
 
         TextView day = view.findViewById(R.id.Day);
         TextView timeView = view.findViewById(R.id.Clock);
@@ -175,7 +176,10 @@ public class HomeScreen extends Fragment {
             //System.out.println(tempIndex);
             typeID = Integer.parseInt(weatherDataSub.substring(tempIndex + 4, tempIndex + 7));
         } catch (StringIndexOutOfBoundsException e) {
-            Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Debug Mode Active, enter a valid city ID to reset.", Toast.LENGTH_SHORT).show();
+
+            if (!activityPaused) {
+                Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Debug Mode Active, enter a valid city ID to reset.", Toast.LENGTH_SHORT).show();
+            }
             typeID = 762;
         }
         System.out.println("Weather type ID: " + typeID);
