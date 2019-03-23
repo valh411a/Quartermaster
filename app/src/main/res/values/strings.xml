@@ -3,7 +3,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
 
-    <string name="title_activity_frag_holder">FragHolder</string>
     <string name="the_current_weather_outside">The current Weather outside:</string>
     <string name="button_launches_google_home_app">Button Launches Google Home app</string>
     <string name="button_shows_setting_dialog">button shows setting dialog</string>
