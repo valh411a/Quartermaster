@@ -46,9 +46,9 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Clock"
-        app:layout_constraintVertical_weight="3"
+        app:layout_constraintVertical_weight="2"
         tools:ignore="HardcodedText"
-        tools:text="@tools:sample/date/mmddyy" />
+        tools:text="Friday, March 22, 2019" />
 
     <TextView
         android:id="@+id/weatherTitle"
