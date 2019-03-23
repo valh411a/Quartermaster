@@ -65,7 +65,6 @@ public class HomeScreen extends Fragment {
         Calendar calendar = Calendar.getInstance();
         date = calendar.getTime();
         time = calendar.getTime();
-        setFullscreen(Objects.requireNonNull(getActivity()));
 
     }
 
@@ -106,6 +105,14 @@ public class HomeScreen extends Fragment {
 
 //        System.out.println("cityID = " + cityNum);
         setWeatherText(view, cityNum);
+
+        view.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
         Log.i("fragResponse", "Fragment View Created.");
         return view;
