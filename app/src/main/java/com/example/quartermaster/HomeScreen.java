@@ -1,7 +1,6 @@
 package com.example.quartermaster;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
@@ -362,12 +361,6 @@ public class HomeScreen extends Fragment {
                 type.setText("Unassigned");
                 break;
         }
-    }
-
-    private void setFullscreen(Activity activity) {
-        int flags = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-
-        activity.getWindow().getDecorView().setSystemUiVisibility(flags);
     }
 
 
