@@ -26,7 +26,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -104,6 +103,12 @@ public class HomeScreen extends Fragment {
 
 //        System.out.println("cityID = " + cityNum);
         setWeatherText(view, cityNum);
+
+        TextView metaDataView = view.findViewById(R.id.metaDataText);
+        String metaDataText = this.getArguments().getString("metaData");
+        if (metaDataText.equals("null by null")) {
+            metaDataView.setText("No music playing");
+        }
 
         view.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -188,7 +193,7 @@ public class HomeScreen extends Fragment {
             }
             typeID = 762;
         }
-        System.out.println("Weather type ID: " + typeID);
+//        System.out.println("Weather type ID: " + typeID);
 
         switch (typeID) {
             case 200:
@@ -399,7 +404,7 @@ public class HomeScreen extends Fragment {
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 } catch (NullPointerException e) {
-                    System.out.println("Params post Null" + Arrays.toString(params));
+//                    System.out.println("Params post Null" + Arrays.toString(params));
                     e.printStackTrace();
                 }
                 conn = (HttpURLConnection) Objects.requireNonNull(url).openConnection();

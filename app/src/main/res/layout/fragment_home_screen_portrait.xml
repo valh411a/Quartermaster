@@ -175,13 +175,72 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".35" />
+        app:layout_constraintGuide_percent=".3" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".42" />
+        app:layout_constraintGuide_percent=".45" />
+
+    <ImageButton
+        android:id="@+id/mediaPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@android:drawable/screen_background_dark_transparent"
+        android:onClick="onClickPrev"
+        android:src="@drawable/ic_skip_previous_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toStartOf="@+id/mediaPlayPause"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/mediaPlayPause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@android:drawable/screen_background_dark_transparent"
+        android:contentDescription="@string/emulates_the_play_pause_media_button"
+        android:onClick="onClickPlayPause"
+        android:src="@drawable/ic_play_arrow_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toStartOf="@+id/mediaNext"
+        app:layout_constraintStart_toEndOf="@+id/mediaPrev" />
+
+    <ImageButton
+        android:id="@+id/mediaNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@android:drawable/screen_background_dark_transparent"
+        android:onClick="onClickNext"
+        android:src="@drawable/ic_skip_next_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mediaPlayPause" />
+
+    <TextView
+        android:id="@+id/metaDataText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/mediaPlayPause"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline6"
+        tools:text="Photograph by Nickelback" />
 
 </android.support.constraint.ConstraintLayout>

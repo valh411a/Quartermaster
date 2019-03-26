@@ -50,12 +50,28 @@
         tools:ignore="HardcodedText"
         tools:text="Friday, March 22, 2019" />
 
+    <TextView
+        android:id="@+id/metaDataText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/mediaPlayPause"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:text="Photograph - Nickelback" />
+
     <ImageButton
         android:id="@+id/mediaPrev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@android:drawable/screen_background_dark_transparent"
@@ -66,7 +82,6 @@
         app:layout_constraintEnd_toStartOf="@+id/mediaPlayPause"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
         tools:ignore="OnClick" />
 
     <ImageButton
@@ -74,7 +89,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@android:drawable/screen_background_dark_transparent"
@@ -84,7 +98,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/mediaNext"
         app:layout_constraintStart_toEndOf="@+id/mediaPrev"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
         tools:ignore="OnClick" />
 
     <ImageButton
@@ -92,7 +105,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@android:drawable/screen_background_dark_transparent"
@@ -102,7 +114,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toEndOf="@+id/mediaPlayPause"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
         tools:ignore="OnClick" />
 
     <TextView
