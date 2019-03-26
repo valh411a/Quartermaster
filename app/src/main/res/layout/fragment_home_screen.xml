@@ -50,6 +50,58 @@
         tools:ignore="HardcodedText"
         tools:text="Friday, March 22, 2019" />
 
+    <ImageButton
+        android:id="@+id/mediaPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@android:drawable/screen_background_dark_transparent"
+        android:contentDescription="@string/emulates_the_skip_previous_media_button"
+        android:onClick="onClickPrev"
+        android:src="@drawable/ic_skip_previous_black_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/mediaPlayPause"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <ImageButton
+        android:id="@+id/mediaPlayPause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@android:drawable/screen_background_dark_transparent"
+        android:contentDescription="@string/emulates_the_play_pause_media_button"
+        android:onClick="onClickPlayPause"
+        android:src="@drawable/ic_play_arrow_black_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/mediaNext"
+        app:layout_constraintStart_toEndOf="@+id/mediaPrev"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <ImageButton
+        android:id="@+id/mediaNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@android:drawable/screen_background_dark_transparent"
+        android:contentDescription="@string/emulates_the_skip_next_media_button"
+        android:onClick="onClickNext"
+        android:src="@drawable/ic_skip_next_black_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toEndOf="@+id/mediaPlayPause"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
     <TextView
         android:id="@+id/weatherTitle"
         android:layout_width="0dp"

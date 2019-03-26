@@ -9,4 +9,7 @@
     <string name="city_code">City Code</string>
     <string name="_1234567">1234567</string>
     <string name="data_obtained_from_https_openweathermap_org">Data obtained from https://openweathermap.org/city/{CITY CODE}</string>
+    <string name="emulates_the_skip_previous_media_button">emulates the skip previousmedia button</string>
+    <string name="emulates_the_play_pause_media_button">emulates the play/pausemedia button</string>
+    <string name="emulates_the_skip_next_media_button">emulates the skip nextmedia button</string>
 </resources>
